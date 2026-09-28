@@ -1,0 +1,5 @@
+$ProjectRoot = 'B:\PROGETTO GITHUB 4\SocketLens'
+$CacheRoot = 'B:\PROGETTO GITHUB 4\.socketlens-cache'
+$env:GOPATH = Join-Path $CacheRoot 'gopath'
+$env:GOMODCACHE = Join-Path $env:GOPATH 'pkg\mod'
+$env:GOCACHE = Join-Path $CacheRoot 'go-build'

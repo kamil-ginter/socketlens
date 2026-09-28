@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.24.x'
+          cache: true
+
+      - name: Go formatting
+        shell: pwsh
+        run: |
+          $files = @(gofmt -l .)
+          if ($files.Count -gt 0) {
+            $files | ForEach-Object { Write-Host $_ }
+            throw "Go formatting check failed."
+          }
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Tests
+        run: go test ./...
+
+      - name: Build
+        run: go build ./cmd/socketlens

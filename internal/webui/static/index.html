@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <title>SocketLens</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="mark">S</span>
+        <div>
+          <strong>SocketLens</strong>
+          <span>Local Network & Service Inspector</span>
+        </div>
+      </div>
+      <div class="version">0.1.0</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">PRIVATE NETWORK INSPECTION</p>
+        <h1>See what is<br>listening.</h1>
+      </div>
+      <p class="heroCopy">
+        Concurrent TCP inspection, local snapshots and change detection.
+        SocketLens 0.1 only accepts private and loopback targets.
+      </p>
+    </section>
+
+    <section class="controls card">
+      <div class="field targetField">
+        <label for="target">TARGET</label>
+        <input id="target" value="127.0.0.1" spellcheck="false">
+      </div>
+
+      <div class="field portsField">
+        <label for="ports">PORTS</label>
+        <input id="ports" value="22,53,80,135,139,443,445,3000,3306,3389,5432,6379,8080,8443" spellcheck="false">
+      </div>
+
+      <div class="field timeoutField">
+        <label for="timeout">TIMEOUT</label>
+        <select id="timeout">
+          <option value="250">250 ms</option>
+          <option value="400" selected>400 ms</option>
+          <option value="750">750 ms</option>
+          <option value="1500">1500 ms</option>
+        </select>
+      </div>
+
+      <button id="scanButton">Scan target</button>
+    </section>
+
+    <div class="scopeNote">
+      Authorized/private targets only · max 1024 ports per scan · no raw packets
+    </div>
+
+    <section class="metrics">
+      <article class="metric">
+        <span>OPEN PORTS</span>
+        <strong id="openCount">—</strong>
+      </article>
+      <article class="metric">
+        <span>NEW</span>
+        <strong id="newCount">—</strong>
+      </article>
+      <article class="metric">
+        <span>CLOSED</span>
+        <strong id="closedCount">—</strong>
+      </article>
+      <article class="metric">
+        <span>DURATION</span>
+        <strong id="duration">—</strong>
+      </article>
+    </section>
+
+    <section class="grid">
+      <div class="card panel">
+        <div class="panelHeader">
+          <div>
+            <p class="eyebrow">OPEN SERVICES</p>
+            <span id="scanStatus">Ready</span>
+          </div>
+          <button class="secondary" id="exportButton" disabled>Export JSON</button>
+        </div>
+
+        <div id="portsTable" class="table empty">
+          Run a scan to inspect a private target.
+        </div>
+      </div>
+
+      <div class="card side">
+        <section>
+          <p class="eyebrow">CHANGE DETECTION</p>
+          <div id="changes" class="emptyBlock">No baseline yet.</div>
+        </section>
+
+        <section class="historySection">
+          <p class="eyebrow">RECENT SCANS</p>
+          <div id="history" class="history"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

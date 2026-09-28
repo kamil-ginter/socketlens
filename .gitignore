@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+artifacts/
+data/
+*.log
+*.db
+*.db-shm
+*.db-wal
+
+SocketLens.exe
+socketlens.exe
